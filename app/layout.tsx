@@ -1,7 +1,7 @@
+import NavBar from "@/components/Navbar";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inria_Sans } from "next/font/google";
-import NavBar from "../components/NavBar";
 
 const inriaSans = Inria_Sans({ subsets: ["latin"], weight: "400" });
 
@@ -21,8 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <NavBar />
-      <body className={inriaSans.className}>{children}</body>
+      <body className={inriaSans.className}>
+        <NavBar />
+        {children}
+      </body>
     </html>
   );
 }
