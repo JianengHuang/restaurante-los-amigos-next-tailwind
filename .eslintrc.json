@@ -1,13 +1,14 @@
 {
-  "extends": [
-    "airbnb-typescript/base",
-    "next/core-web-vitals",
-    "plugin:prettier/recommended"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "@typescript-eslint", "prettier"],
-  "rules": {
-    "max-len": ["error", { "code": 140 }],
-    "prettier/prettier": ["error", { "endOfLine": "auto" }]
-  }
+	"extends": [
+		"next/core-web-vitals",
+		"plugin:@typescript-eslint/recommended",
+		"eslint:recommended",
+		"plugin:prettier/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"plugins": ["react", "@typescript-eslint"],
+	"rules": {
+		"max-len": ["error", { "code": 140 }],
+		"prettier/prettier": ["error", { "endOfLine": "auto" }]
+	}
 }
