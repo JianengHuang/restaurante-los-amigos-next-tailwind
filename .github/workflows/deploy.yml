@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout (clones the repo)
         uses: actions/checkout@v3
+      - name: Install pnpm
+        run: npm i -g pnpm
       - name: Install Dependencies
         run: pnpm i -P
       - name: Build
