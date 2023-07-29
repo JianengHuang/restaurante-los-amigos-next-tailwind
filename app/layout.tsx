@@ -1,4 +1,4 @@
-import NavBar from '../components/Navbar';
+import NavBar from '@components/Navbar';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inria_Sans } from 'next/font/google';
