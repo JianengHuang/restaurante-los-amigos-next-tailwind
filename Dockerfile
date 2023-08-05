@@ -37,7 +37,7 @@ RUN echo "HOST=${HOST}" >> .env.local
 RUN echo $HOST
 RUN echo "DATABASE_URL=${DATABASE_URL}" >> .env.local
 ENV PORT ${PORT}
-ARG HOST ${HOST}
+RUN echo "HOST: $HOST"
 ENV DATABASE_URL ${DATABASE_URL}
 RUN yarn prisma generate
 RUN yarn build
