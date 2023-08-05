@@ -31,10 +31,11 @@ COPY --link  . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN touch .env.production
-RUN echo "PORT=${PORT}" >> .env.production
-RUN echo "HOST=${HOST}" >> .env.production
-RUN echo "DATABASE_URL=${DATABASE_URL}" >> .env.production
+RUN touch .env.local
+RUN echo "PORT=${PORT}" >> .env.local
+RUN echo "HOST=${HOST}" >> .env.local
+RUN echo $HOST
+RUN echo "DATABASE_URL=${DATABASE_URL}" >> .env.local
 ENV PORT ${PORT}
 ENV HOST ${HOST}
 ENV DATABASE_URL ${DATABASE_URL}
