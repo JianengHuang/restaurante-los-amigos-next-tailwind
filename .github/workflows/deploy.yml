@@ -31,5 +31,6 @@ jobs:
             "PORT=${{ secrets.PORT }}"
             "HOST=${{ secrets.HOST }}"
             "DATABASE_URL=${{ secrets.DATABASE_URL }}"
+          network: host
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
