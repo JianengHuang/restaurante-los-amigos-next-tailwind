@@ -34,11 +34,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN touch .env.local
 RUN echo "PORT=${PORT}" >> .env.local
 RUN echo "HOST=${HOST}" >> .env.local
-RUN echo $HOST
 RUN echo "DATABASE_URL=${DATABASE_URL}" >> .env.local
-ENV PORT ${PORT}
-RUN echo "HOST: $HOST"
-ENV DATABASE_URL ${DATABASE_URL}
 RUN yarn prisma generate
 RUN yarn build
 
