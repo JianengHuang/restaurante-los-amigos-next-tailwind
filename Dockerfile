@@ -31,6 +31,13 @@ COPY --link  . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
+# RUN touch .env.local
+ARG DATABASE_URL
+ENV DATABASE_URL ${DATABASE_URL}
+ARG PORT
+ENV PORT ${PORT}
+ARG HOST
+ENV HOST ${HOST}
 RUN yarn prisma generate
 RUN yarn build
 
