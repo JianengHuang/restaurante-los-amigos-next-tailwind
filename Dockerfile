@@ -31,10 +31,9 @@ COPY --link  . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN touch .env.local
-RUN echo "HOST=${HOST}" >> .env.local
-RUN echo "PORT=${PORT}" >> .env.local
-RUN echo "DATABASE_URL=${DATABASE_URL}" >> .env.local
+ENV PORT $PORT
+ENV HOST $HOST
+ENV DATABASE_URL $DATABASE_URL
 RUN npx prisma generate
 RUN yarn build
 
@@ -63,9 +62,5 @@ COPY --from=builder --link --chown=1001:1001 /app/.next/static ./.next/static
 USER nextjs
 
 EXPOSE 3000
-
-ENV PORT ${PORT}
-ENV HOST ${HOST}
-ENV DATABASE_URL ${DATABASE_URL}
 
 CMD ["node", "server.js"]
