@@ -8,8 +8,8 @@ export async function GET() {
 	return NextResponse.json(dishes);
 }
 
-export async function POST(request: Request) {
-	const body = await request.json();
-	const dish = await prisma.dish.create({ data: body });
-	return new Response(JSON.stringify(dish), { status: 200 });
-}
+// export async function POST(request: Request) {
+// 	const body = await request.json();
+// 	const dish = await prisma.dish.create({ data: body });
+// 	return new Response(JSON.stringify(dish), { status: 200 });
+// }
