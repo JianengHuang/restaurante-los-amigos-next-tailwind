@@ -23,8 +23,6 @@ jobs:
           context: .
           file: ./Dockerfile
           build-args: |
-            "PORT=${{ secrets.PORT }}"
-            "HOST=${{ secrets.HOST }}"
             "DATABASE_URL=${{ secrets.DATABASE_URL }}"
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/clockbox:latest
