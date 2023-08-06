@@ -6,7 +6,7 @@ import Loading from './loading';
 
 export default async function Home() {
 	const response = await getDishes();
-	const dishes: Dish[] = await response.json();
+	const dishes: Dish[] = await response;
 
 	return (
 		<div>

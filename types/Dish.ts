@@ -1,5 +1,5 @@
 export type Dish = {
-	_id: string;
+	id: string;
 	dishId: number;
 	name: string;
 	description: string;
@@ -8,7 +8,7 @@ export type Dish = {
 	image: string;
 	category: string;
 	allergens: number[];
-	mightCointain: number[];
+	mightContain: number[];
 	isRecommended: boolean;
 	createdAt: Date;
 	updatedAt: Date;
