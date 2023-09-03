@@ -1,20 +1,29 @@
 import DishContainer from '@components/DishContainer';
-import { Suspense } from 'react';
-import { Dish } from 'types/Dish';
 import getDishes from 'utils/getDishes';
-import Loading from './loading';
+import getCategories from 'utils/getCategories';
 
 export default async function Home() {
-	const response = await getDishes();
-	const dishes: Dish[] = await response;
+	const [categories, dishes] = await Promise.all([
+		getCategories(),
+		getDishes(),
+	]);
+
+	const categorizedDishes = categories.map((category) => ({
+		id: category.id,
+		category: category.category,
+		dishes: dishes.filter((dish) => dish.category === category.category),
+	}));
 
 	return (
-		<div>
-			<h1>Menu</h1>
-			{dishes.map((dish) => (
-				<Suspense key={dish.dishId} fallback={<Loading />}>
-					<DishContainer dish={dish} />
-				</Suspense>
+		<div className="mt-3">
+			{categorizedDishes.map((category) => (
+				<div key={category.id}>
+					<h2 className="mx-2 text-2xl capitalize">{category.category}</h2>
+					{category.dishes.map((dish) => (
+						<DishContainer key={dish.id} dish={dish} />
+					))}
+					<hr className="m-auto my-4 w-3/4" />
+				</div>
 			))}
 		</div>
 	);

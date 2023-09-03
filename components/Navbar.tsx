@@ -1,23 +1,30 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import BurgerMenuIcon from './BurgerMenuIcon';
 
 const Navbar = () => {
 	return (
 		<>
-			<div className="absolute z-0 flex h-14 w-full bg-red-300" />
-			<Link href="/">
-				<div className="relative z-10 flex flex-row items-center justify-center">
-					<Image
-						width="75"
-						height="75"
-						src="/logo/los-amigos-happy-300.png"
-						alt="los amigos logo"
-					/>
-					<div className="m-1 flex flex-col content-center justify-center">
-						<h1 className="hidden text-xl leading-5">Restaurante Los Amigos</h1>
-					</div>
+			<div className="absolute h-14 w-full bg-red-300 md:h-[88px]"></div>
+			<div className="grid grid-cols-3">
+				<BurgerMenuIcon />
+				<div className="z-10 flex w-full flex-row items-center justify-center">
+					<Link href="/" className="flex select-none flex-row">
+						<Image
+							width="75"
+							height="76"
+							src="/logo/centered-transparent-happy-300.png"
+							alt="los amigos logo"
+							priority={false}
+						/>
+						<div className="m-1 hidden max-w-[155px] md:mx-5 md:flex md:flex-col md:content-center md:justify-center">
+							<h1 className="text-2xl font-semibold leading-5">
+								Restaurante Los Amigos
+							</h1>
+						</div>
+					</Link>
 				</div>
-			</Link>
+			</div>
 		</>
 	);
 };

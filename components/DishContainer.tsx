@@ -13,13 +13,21 @@ const DishContainer = ({ dish }: Props) => {
 		dishSrc = dish.image;
 	}
 	return (
-		<div className="m-3 grid grid-cols-[100px_1fr] bg-slate-500">
-			<Image src={dishSrc} alt={dish.name} width={100} height={100} />
-			<div>
-				<p>{dish.name}</p>
-				<p>{dish.description}</p>
-				<p>{dish.price}</p>
-				<p>{dish.category}</p>
+		<div className="m-3 grid max-w-xl grid-cols-[100px_1fr] gap-4 rounded-xl bg-red-100">
+			<Image
+				src={dishSrc}
+				alt={dish.name}
+				width={100}
+				height={100}
+				className="m-3 rounded-xl"
+				priority={false}
+			/>
+			<div className="mx-3 my-2 leading-8">
+				<h3 className="break-words text-lg font-bold leading-6">{dish.name}</h3>
+				<p>{dish.price}€</p>
+				<div className="leading-5">
+					<p>{dish.description}</p>
+				</div>
 			</div>
 		</div>
 	);
