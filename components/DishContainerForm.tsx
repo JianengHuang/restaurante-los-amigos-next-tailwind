@@ -24,6 +24,8 @@ export type UnFilteredDish = {
 };
 
 const DishContainerForm = () => {
+	const { dishes } = useContext(DataContext);
+
 	const [newDish, setNewDish] = useState({
 		dishId: 0,
 		name: '',
@@ -44,6 +46,10 @@ const DishContainerForm = () => {
 
 	const setAddDishClicked = useContext(AddDishClickedContext);
 
+	const [errorMessage, setErrorMessage] = useState('');
+
+	const numberOrCommasRegex = /^[0-9,]*$/;
+
 	const handleChange = (
 		event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
 		key: keyof UnFilteredDish,
@@ -59,12 +65,25 @@ const DishContainerForm = () => {
 			newDish.description !== '' &&
 			newDish.price !== 0 &&
 			newDish.category !== '' &&
-			newDish.allergens !== '' &&
-			newDish.mightContain !== ''
+			!dishes.some((dish) => dish.dishId == newDish.dishId) &&
+			!dishes.some((dish) => dish.name == newDish.name) &&
+			newDish.allergens.match(numberOrCommasRegex) &&
+			newDish.mightContain.match(numberOrCommasRegex)
 		) {
 			setIsReadyToSubmit(true);
 		} else {
 			setIsReadyToSubmit(false);
+			if (dishes.some((dish) => dish.dishId == newDish.dishId)) {
+				setErrorMessage('El id del plato ya existe');
+			} else if (dishes.some((dish) => dish.name == newDish.name)) {
+				setErrorMessage('El nombre del plato ya existe');
+			} else if (!newDish.allergens.match(numberOrCommasRegex)) {
+				setErrorMessage('Los alergenos solo pueden ser numeros o comas');
+			} else if (!newDish.mightContain.match(numberOrCommasRegex)) {
+				setErrorMessage('Los puede contener solo pueden ser numeros o comas');
+			} else {
+				setErrorMessage('');
+			}
 		}
 	}, [newDish]);
 
@@ -99,10 +118,12 @@ const DishContainerForm = () => {
 
 	return (
 		<div className="flex flex-col items-center ">
-			{savedSuccesfully && (
+			{savedSuccesfully ? (
 				<div>
 					<p className="text-green-500">Plato añadido correctamente</p>
 				</div>
+			) : (
+				<span className="text-red-500">{errorMessage}</span>
 			)}
 			<form onSubmit={handleSubmit}>
 				{formData.map((key) => (

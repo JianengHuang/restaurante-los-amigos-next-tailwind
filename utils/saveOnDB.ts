@@ -1,5 +1,6 @@
 import { FilteredCategory } from 'types/Category';
 import { DishToSend } from 'types/Dish';
+import { revalidateTagFunction } from './revalidateTagFunction';
 
 export const saveCategoriesOnDB = async (categories: FilteredCategory[]) => {
 	const response1 = await fetch(
@@ -17,11 +18,10 @@ export const saveCategoriesOnDB = async (categories: FilteredCategory[]) => {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			next: {
-				tags: ['category'],
-			},
 		},
 	);
+
+	revalidateTagFunction('category');
 
 	return response1.status === 200 && response2.status === 200;
 };
@@ -35,11 +35,10 @@ export const updateDishOnDB = async (dish: DishToSend) => {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			next: {
-				tags: ['dish'],
-			},
 		},
 	);
+
+	revalidateTagFunction('dish');
 
 	return response.status === 200;
 };
@@ -52,10 +51,9 @@ export const saveDishOnDB = async (dish: DishToSend) => {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		next: {
-			tags: ['dish'],
-		},
 	});
+
+	revalidateTagFunction('dish');
 
 	return response.status === 200;
 };

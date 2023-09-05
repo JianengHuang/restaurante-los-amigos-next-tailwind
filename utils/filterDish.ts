@@ -18,8 +18,14 @@ const filterDish = (dish: UnFilteredDish) => {
 		price: Number(dish.price),
 		image: `/images/${dish.dishId}.jpg`,
 		category: dish.category,
-		allergens: filterStringToNumberArray(dish.allergens),
-		mightContain: filterStringToNumberArray(dish.mightContain),
+		allergens:
+			dish.mightContain != ''
+				? filterStringToNumberArray(dish.mightContain)
+				: [],
+		mightContain:
+			dish.mightContain != ''
+				? filterStringToNumberArray(dish.mightContain)
+				: [],
 		isRecommended: false,
 		priority: 0,
 	};
